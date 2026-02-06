@@ -7,8 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Phone } from "lucide-react-native";
+import { useRouter } from "expo-router";
 
 export default function LoginCard({ onContinue }) {
+  const router = useRouter();
+
   return (
     <View style={styles.card}>
       <Text style={styles.title}>Login Your Account</Text>
@@ -27,9 +30,18 @@ export default function LoginCard({ onContinue }) {
         />
       </View>
 
+      {/* Continue Button */}
       <TouchableOpacity style={styles.button} onPress={onContinue}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
+
+      {/* Register Text */}
+      <View style={styles.registerRow}>
+        <Text style={styles.registerText}>If new user? </Text>
+        <TouchableOpacity onPress={() => router.push("/auth/register")}>
+          <Text style={styles.registerLink}>Register now</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -85,6 +97,24 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFF",
     fontSize: 14,
+    fontWeight: "600",
+  },
+
+  /* 🔽 New styles (small text) */
+  registerRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 12,
+  },
+
+  registerText: {
+    fontSize: 12,
+    color: "#474747",
+  },
+
+  registerLink: {
+    fontSize: 12,
+    color: "#ED6E0A",
     fontWeight: "600",
   },
 });

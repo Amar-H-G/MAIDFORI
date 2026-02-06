@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Animated } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
 import { Award } from "lucide-react-native";
+import { StatusBar } from "expo-status-bar";
 
 const { width } = Dimensions.get("window");
 
@@ -26,7 +27,7 @@ export default function Splash() {
     ]).start();
 
     const timer = setTimeout(() => {
-      router.replace("/auth/register");
+      router.replace("/auth/login");
     }, 3500);
 
     return () => clearTimeout(timer);
@@ -34,6 +35,7 @@ export default function Splash() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <View style={styles.topCurve} />
       <View style={styles.topCurveOverlay} />
 

@@ -1,8 +1,10 @@
 import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 export default function RootLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <StatusBar translucent backgroundColor="transparent" />
       <Stack.Screen name="splash" />
       <Stack.Screen name="auth" />
       <Stack.Screen name="home" />

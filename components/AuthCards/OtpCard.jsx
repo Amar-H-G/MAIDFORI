@@ -1,8 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Pencil } from "lucide-react-native";
+import { useRouter } from "expo-router";
 
 export default function OtpCard() {
+  const router = useRouter();
+
   return (
     <View style={styles.card}>
       {/* Title */}
@@ -34,7 +37,10 @@ export default function OtpCard() {
       </View>
 
       {/* Verify Button */}
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push("/auth/verification")}
+      >
         <Text style={styles.buttonText}>Verify OTP</Text>
       </TouchableOpacity>
     </View>

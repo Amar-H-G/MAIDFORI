@@ -10,6 +10,7 @@ import {
 
 import LoginCard from "../../components/AuthCards/LoginCard";
 import OtpCard from "../../components/AuthCards/OtpCard";
+import { StatusBar } from "expo-status-bar";
 
 const { width, height } = Dimensions.get("window");
 
@@ -18,6 +19,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
+      <StatusBar style="light" />
       <ImageBackground
         source={require("../../assets/app/splashImage/LoginBG.png")}
         style={styles.bg}

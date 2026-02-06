@@ -18,17 +18,20 @@ import {
   MessageCircle,
   Check,
 } from "lucide-react-native";
+import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
-export default function RegisterScreen({ navigation }) {
+export default function RegisterScreen() {
   const [gender, setGender] = useState("Female");
   const [sameWhatsapp, setSameWhatsapp] = useState(true);
 
   return (
     <SafeAreaView style={styles.safe}>
+      <StatusBar style="dark" />
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* ===== Header ===== */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation?.goBack()}>
+          <TouchableOpacity onPress={() => router.back()}>
             <ArrowLeft size={22} color="#0C0C26" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Register Now</Text>
@@ -107,9 +110,20 @@ export default function RegisterScreen({ navigation }) {
         />
 
         {/* ===== Continue ===== */}
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push("/auth/verification")}
+        >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
+
+        {/* ===== Login Now (NEW) ===== */}
+        <View style={styles.loginRow}>
+          <Text style={styles.loginText}>Already have an account? </Text>
+          <TouchableOpacity onPress={() => router.push("/auth/login")}>
+            <Text style={styles.loginLink}>Login Now</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -290,7 +304,6 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     marginHorizontal: 20,
     marginTop: 90,
-    marginBottom: 30,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -298,6 +311,25 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFF",
     fontSize: 14,
+    fontWeight: "600",
+  },
+
+  /* 🔽 NEW LOGIN ROW */
+  loginRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 12,
+    marginBottom: 30,
+  },
+
+  loginText: {
+    fontSize: 12,
+    color: "#474747",
+  },
+
+  loginLink: {
+    fontSize: 12,
+    color: "#ED6E0A",
     fontWeight: "600",
   },
 });
