@@ -9,6 +9,7 @@ import {
   Image,
 } from "react-native";
 import { Wallet } from "lucide-react-native";
+import { router } from "expo-router";
 
 const HeaderSection = () => {
   return (
@@ -31,7 +32,10 @@ const HeaderSection = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.walletCircle}>
+        <TouchableOpacity
+          style={styles.walletCircle}
+          onPress={() => router.push("/wallet")}
+        >
           <Wallet size={20} color="#1e1b4b" strokeWidth={2.5} />
         </TouchableOpacity>
       </View>
