@@ -1,11 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-// Lucide icons import korchi
 import { Clock, User, MapPin, Calendar } from "lucide-react-native";
 
-const UpcomingBookingCard = () => (
+// onAccept prop add kora hoyeche
+const UpcomingBookingCard = ({ onAccept }) => (
   <View style={styles.card}>
-    {/* Header: Title and Timer */}
     <View style={styles.cardHeader}>
       <Text style={styles.title}>Child Care</Text>
       <View style={styles.timerRow}>
@@ -14,7 +13,6 @@ const UpcomingBookingCard = () => (
       </View>
     </View>
 
-    {/* User Profile Info */}
     <View style={styles.userRow}>
       <View style={styles.iconBackgroundSmall}>
         <User size={14} color="#374151" />
@@ -22,7 +20,6 @@ const UpcomingBookingCard = () => (
       <Text style={styles.userName}>Kari Chanchoda</Text>
     </View>
 
-    {/* Address & Distance */}
     <View style={styles.infoRow}>
       <View style={styles.rowLeft}>
         <MapPin size={16} color="#1e1b4b" style={styles.inlineIcon} />
@@ -33,7 +30,6 @@ const UpcomingBookingCard = () => (
       <Text style={styles.distance}>2km from you</Text>
     </View>
 
-    {/* Date/Time & Price */}
     <View style={styles.infoRow}>
       <View style={styles.rowLeft}>
         <Calendar size={16} color="#1e1b4b" style={styles.inlineIcon} />
@@ -43,12 +39,13 @@ const UpcomingBookingCard = () => (
     </View>
     <Text style={styles.duration}>Duration: 2 Hours</Text>
 
-    {/* Action Buttons: Reject & Accept */}
     <View style={styles.btnGroup}>
       <TouchableOpacity style={styles.rejectBtn}>
         <Text style={styles.rejectText}>Reject</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.acceptBtn}>
+
+      {/* Accept button click korle onAccept trigger hobe */}
+      <TouchableOpacity style={styles.acceptBtn} onPress={onAccept}>
         <Text style={styles.acceptText}>Accept Job</Text>
       </TouchableOpacity>
     </View>
@@ -58,6 +55,7 @@ const UpcomingBookingCard = () => (
 export default UpcomingBookingCard;
 
 const styles = StyleSheet.create({
+  // ... (StyleSheet same thakbe)
   card: {
     backgroundColor: "white",
     borderRadius: 16,
@@ -76,11 +74,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 16, fontWeight: "bold", color: "#1e1b4b" },
   timerRow: { flexDirection: "row", alignItems: "center" },
   timer: { color: "#4B5563", fontSize: 14, fontWeight: "500" },
-  userRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 12,
-  },
+  userRow: { flexDirection: "row", alignItems: "center", marginVertical: 12 },
   iconBackgroundSmall: {
     width: 24,
     height: 24,
@@ -97,21 +91,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginTop: 12,
   },
-  rowLeft: {
-    flexDirection: "row",
-    flex: 0.7,
-    alignItems: "flex-start",
-  },
-  inlineIcon: {
-    marginRight: 6,
-    marginTop: 1,
-  },
-  address: {
-    flex: 1,
-    fontSize: 12,
-    color: "#6B7280",
-    lineHeight: 18,
-  },
+  rowLeft: { flexDirection: "row", flex: 0.7, alignItems: "flex-start" },
+  inlineIcon: { marginRight: 6, marginTop: 1 },
+  address: { flex: 1, fontSize: 12, color: "#6B7280", lineHeight: 18 },
   distance: { fontSize: 12, fontWeight: "bold", color: "#374151" },
   time: { fontSize: 13, color: "#374151" },
   price: { fontSize: 14, fontWeight: "bold", color: "#374151" },
