@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: "#2E2E74",
     paddingHorizontal: 20,
-    paddingTop: Platform.OS === "android" ? 50 : 25,
+    paddingTop: Platform.OS === "android" ? 50 : 10,
     paddingBottom: 22,
     position: "relative",
   },

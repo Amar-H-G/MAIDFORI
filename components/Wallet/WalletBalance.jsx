@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { router } from "expo-router";
 
 const WalletBalance = () => (
   <View style={styles.balanceCard}>
@@ -13,7 +14,10 @@ const WalletBalance = () => (
       <Text style={styles.label}>Wallet Balance</Text>
       <Text style={styles.amount}>₹1,440</Text>
     </View>
-    <TouchableOpacity style={styles.addMoneyBtn}>
+    <TouchableOpacity
+      style={styles.addMoneyBtn}
+      onPress={() => router.push("/wallet/recharge")}
+    >
       <Text style={styles.addMoneyText}>Add Money</Text>
     </TouchableOpacity>
   </View>
