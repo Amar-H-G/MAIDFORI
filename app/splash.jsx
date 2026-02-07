@@ -27,8 +27,7 @@ export default function Splash() {
     ]).start();
 
     const timer = setTimeout(() => {
-      // router.replace("/auth/login");
-      router.replace("/profile");
+      router.replace("/auth/login");
     }, 1500);
 
     return () => clearTimeout(timer);

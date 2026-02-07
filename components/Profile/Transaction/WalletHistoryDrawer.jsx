@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 20,
-    borderBottomWidth: 1,
+    // borderBottomWidth: 1,
     borderBottomColor: "#f3f4f6",
   },
   backBtn: { marginRight: 15 },

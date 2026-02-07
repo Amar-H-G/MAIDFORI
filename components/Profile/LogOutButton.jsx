@@ -1,6 +1,7 @@
 import React from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import { LogOut } from "lucide-react-native";
+import { router } from "expo-router";
 
 const LogOutButton = () => (
   <Pressable
@@ -8,6 +9,7 @@ const LogOutButton = () => (
       styles.button,
       pressed ? styles.buttonActive : styles.buttonInactive,
     ]}
+    onPress={() => router.push("/splash")}
   >
     {({ pressed }) => (
       <>

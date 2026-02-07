@@ -10,6 +10,7 @@ export default function RootLayout() {
       <Stack.Screen name="home" />
       <Stack.Screen name="wallet" />
       <Stack.Screen name="profile" />
+      <Stack.Screen name="not-found" />
     </Stack>
   );
 }
