@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -13,9 +13,11 @@ import WalletBalance from "../../components/Wallet/WalletBalance";
 import QuickActions from "../../components/Profile/QuickActions";
 import MenuOptions from "../../components/Profile/MenuOptions";
 import LogOutButton from "../../components/Profile/LogOutButton";
+import WalletHistoryDrawer from "../../components/Profile/Transaction/WalletHistoryDrawer";
 import { StatusBar } from "expo-status-bar";
 
 const MainProfileScreen = () => {
+  const [historyVisible, setHistoryVisible] = useState(false);
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
@@ -45,11 +47,15 @@ const MainProfileScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <QuickActions />
+          <QuickActions onOpenHistory={() => setHistoryVisible(true)} />
         </View>
         <MenuOptions />
         <LogOutButton />
       </ScrollView>
+      <WalletHistoryDrawer
+        visible={historyVisible}
+        onClose={() => setHistoryVisible(false)}
+      />
     </SafeAreaView>
   );
 };

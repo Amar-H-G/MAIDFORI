@@ -1,21 +1,27 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Headphones, ReceiptText, MapPin } from "lucide-react-native";
 
-const QuickActions = () => (
+const QuickActions = ({ onOpenHistory }) => (
   <View style={styles.grid}>
-    <View style={[styles.box, { backgroundColor: "#fae8ff" }]}>
+    <TouchableOpacity style={[styles.box, { backgroundColor: "#fae8ff" }]}>
       <Headphones size={24} color="#a21caf" />
       <Text style={styles.boxText}>Help &{"\n"}Support</Text>
-    </View>
-    <View style={[styles.box, { backgroundColor: "#f5f5f4" }]}>
+    </TouchableOpacity>
+
+    {/* Transaction History Clickable Card */}
+    <TouchableOpacity
+      style={[styles.box, { backgroundColor: "#f0f2f0" }]}
+      onPress={onOpenHistory}
+    >
       <ReceiptText size={24} color="#4d7c0f" />
       <Text style={styles.boxText}>Transaction{"\n"}History</Text>
-    </View>
-    <View style={[styles.box, { backgroundColor: "#ccfbf1" }]}>
+    </TouchableOpacity>
+
+    <TouchableOpacity style={[styles.box, { backgroundColor: "#e0f7f6" }]}>
       <MapPin size={24} color="#0f766e" />
       <Text style={styles.boxText}>Service{"\n"}Location</Text>
-    </View>
+    </TouchableOpacity>
   </View>
 );
 
