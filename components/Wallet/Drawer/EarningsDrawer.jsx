@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     // marginTop: Platform.OS === "ios" ? 50 : 20, // Status bar area bad diye
     // borderTopLeftRadius: 25,
     // borderTopRightRadius: 25,
+    paddingTop: 25,
   },
   header: {
     flexDirection: "row",

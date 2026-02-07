@@ -36,12 +36,11 @@ const MainProfileScreen = () => {
               <View>
                 <View style={styles.nameRow}>
                   <Text style={styles.welcomeText}>Welcome, </Text>
-                  <Text style={styles.userName}>Jhon</Text>
+                  <Text style={styles.userName}>Amar</Text>
                   <View style={styles.verifiedCheck} />
                 </View>
                 <Text style={styles.phoneText}>+91 98******04</Text>
               </View>
-
               <TouchableOpacity style={styles.editBtn}>
                 <Pencil size={20} color="#71717a" />
               </TouchableOpacity>

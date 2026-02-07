@@ -142,6 +142,8 @@ const styles = StyleSheet.create({
     // marginTop: Platform.OS === "ios" ? 50 : 20,
     // borderTopLeftRadius: 28,
     // borderTopRightRadius: 28,
+    // paddingTop: Platform.OS === "ios" ? 20 : 20,
+    paddingTop: 25,
   },
   header: {
     flexDirection: "row",
