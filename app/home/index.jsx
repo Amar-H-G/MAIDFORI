@@ -1,14 +1,11 @@
-import React, { useState } from "react";
-import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native";
-import HeaderSection from "../../components/Home/HeaderSection";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import AvailabilityToggle from "../../components/Home/AvailabilityToggle";
+import Footer from "../../components/Home/Footer";
+import HeaderSection from "../../components/Home/HeaderSection";
 import JobCard from "../../components/Home/JobCard";
 import UpcomingBookingCard from "../../components/Home/UpcomingBookingCard";
-import Footer from "../../components/Home/Footer";
-import JobDetailsDrawer from "../../components/Job/Drawer/jobDetailsDrawer";
 
 const HomeScreen = () => {
-  const [drawerVisible, setDrawerVisible] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <HeaderSection />
@@ -22,15 +19,10 @@ const HomeScreen = () => {
           <JobCard />
 
           <Text style={styles.sectionTitle}>Upcoming Booking</Text>
-          <UpcomingBookingCard onAccept={() => setDrawerVisible(true)} />
+          <UpcomingBookingCard />
         </View>
       </ScrollView>
       <Footer />
-      {/* Drawer Component */}
-      <JobDetailsDrawer
-        visible={drawerVisible}
-        onClose={() => setDrawerVisible(false)}
-      />
     </SafeAreaView>
   );
 };

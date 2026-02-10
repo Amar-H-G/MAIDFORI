@@ -1,9 +1,9 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Clock, User, MapPin, Calendar } from "lucide-react-native";
+import { router } from "expo-router";
+import { Calendar, Clock, MapPin, User } from "lucide-react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // onAccept prop add kora hoyeche
-const UpcomingBookingCard = ({ onAccept }) => (
+const UpcomingBookingCard = () => (
   <View style={styles.card}>
     <View style={styles.cardHeader}>
       <Text style={styles.title}>Child Care</Text>
@@ -45,7 +45,10 @@ const UpcomingBookingCard = ({ onAccept }) => (
       </TouchableOpacity>
 
       {/* Accept button click korle onAccept trigger hobe */}
-      <TouchableOpacity style={styles.acceptBtn} onPress={onAccept}>
+      <TouchableOpacity
+        style={styles.acceptBtn}
+        onPress={() => router.push("/jobDetailes")}
+      >
         <Text style={styles.acceptText}>Accept Job</Text>
       </TouchableOpacity>
     </View>
