@@ -24,7 +24,7 @@ export default function VerificationScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <View style={styles.container}>
         {/* ===== Icon Image ===== */}
         <Image

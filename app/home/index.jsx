@@ -4,10 +4,12 @@ import Footer from "../../components/Home/Footer";
 import HeaderSection from "../../components/Home/HeaderSection";
 import JobCard from "../../components/Home/JobCard";
 import UpcomingBookingCard from "../../components/Home/UpcomingBookingCard";
+import { StatusBar } from "expo-status-bar";
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="light" backgroundColor="white" translucent={false} />
       <HeaderSection />
       <ScrollView
         showsVerticalScrollIndicator={false}

@@ -8,9 +8,10 @@ import {
   Compass,
   User,
 } from "lucide-react-native";
+import { router } from "expo-router";
 
 const JobCard = () => (
-  <View style={styles.card}>
+  <TouchableOpacity style={styles.card} onPress={() => router.push("/jobs")}>
     {/* Header: Title and Top Icons */}
     <View style={styles.cardHeader}>
       <Text style={styles.title}>Child Care</Text>
@@ -67,7 +68,7 @@ const JobCard = () => (
         <Text style={styles.btnText}>Start Job</Text>
       </TouchableOpacity>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
 export default JobCard;

@@ -9,19 +9,22 @@ import {
 import {
   Dimensions,
   Image,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import OTPVerificationModal from "../../components/OtpVerification/jobStartWithOtp";
+import { StatusBar } from "expo-status-bar";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 const JobDetailsScreen = ({ navigation }) => {
   // Navigation handle korar jonno logic
   const router = useRouter(); // Router instance initialize
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleBack = () => {
     // Eta automatic pichon-er parent screen-e niye jabe
@@ -35,8 +38,7 @@ const JobDetailsScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" />
-
+      <StatusBar style="dark" backgroundColor="white" translucent={false} />
       <View style={styles.mainContainer}>
         {/* Updated Header Section with Back Button */}
         <View style={styles.headerSection}>
@@ -118,11 +120,19 @@ const JobDetailsScreen = ({ navigation }) => {
           </View>
 
           {/* Action Button */}
-          <TouchableOpacity style={styles.startBtn}>
+          <TouchableOpacity
+            style={styles.startBtn}
+            onPress={() => setModalVisible(true)}
+          >
             <Text style={styles.startBtnText}>Start Job</Text>
           </TouchableOpacity>
         </View>
       </View>
+      <OTPVerificationModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onVerify={(code) => console.log("OTP is:", code)}
+      />
     </SafeAreaView>
   );
 };
@@ -130,7 +140,7 @@ const JobDetailsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "white",
+    // backgroundColor: "white",
   },
   mainContainer: {
     flex: 1,
