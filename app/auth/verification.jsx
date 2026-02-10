@@ -1,30 +1,41 @@
 import React, { useEffect } from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
 
 const { width } = Dimensions.get("window");
 
 export default function VerificationScreen() {
   // ⏳ Auto redirect after 2 seconds
   useEffect(() => {
-    const timer = setTimeout(() => {
-      router.push("/home");
-    }, 2500);
+    // 1. Screen ashar 1.5 second por Toast show korbe
+    const toastTimer = setTimeout(() => {
+      Toast.show({
+        type: "success",
+        text1: "Login Successful!",
+        props: { code: 200 },
+        position: "top",
+        visibilityTime: 2000,
+      });
+    }, 1500);
 
-    return () => clearTimeout(timer);
-  }, []);
+    // 2. Mot 3 second por Home-e navigate hobe
+    // (Jate toast show korar por user ektu somoy pay)
+    const redirectTimer = setTimeout(() => {
+      router.push("/home");
+    }, 3500);
+
+    return () => {
+      clearTimeout(toastTimer);
+      clearTimeout(redirectTimer);
+    };
+  }, [router]);
 
   return (
     <SafeAreaView style={styles.safe}>
-      <StatusBar style="light" />
+      <StatusBar style="dark" translucent={false} />
       <View style={styles.container}>
         {/* ===== Icon Image ===== */}
         <Image
@@ -51,7 +62,7 @@ export default function VerificationScreen() {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "transparent",
   },
 
   container: {

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   View,
   Text,
   StyleSheet,
   ImageBackground,
   Dimensions,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import LoginCard from "../../components/AuthCards/LoginCard";
 import OtpCard from "../../components/AuthCards/OtpCard";
@@ -19,7 +19,11 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <StatusBar style="light" />
+      <StatusBar
+        style="dark"
+        translucent={true}
+        backgroundColor="transparent"
+      />
       <ImageBackground
         source={require("../../assets/app/splashImage/LoginBG.png")}
         style={styles.bg}
@@ -47,7 +51,6 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: "#fff",
   },
 
   bg: {
