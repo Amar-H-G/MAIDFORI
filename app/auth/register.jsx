@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import {
-  ArrowLeft,
-  User,
-  Calendar,
-  ChevronDown,
-  Phone,
-  Mail,
-  MessageCircle,
-  Check,
-} from "lucide-react-native";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import {
+  ArrowLeft,
+  Calendar,
+  Check,
+  ChevronDown,
+  Mail,
+  MessageCircle,
+  Phone,
+  User,
+} from "lucide-react-native";
+import { useState } from "react";
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function RegisterScreen() {
   const [gender, setGender] = useState("Female");
@@ -112,7 +112,7 @@ export default function RegisterScreen() {
         {/* ===== Continue ===== */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push("/auth/verification")}
+          onPress={() => router.push("/auth/completeProfile")}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
