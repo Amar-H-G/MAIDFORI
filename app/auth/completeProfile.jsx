@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Image,
@@ -18,6 +18,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 const CompleteAccount = () => {
   const navigation = useNavigation();
+  const router = useRouter();
   const [profileImage, setProfileImage] = useState(null);
   const [service, setService] = useState("Barber");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -52,7 +53,8 @@ const CompleteAccount = () => {
               />
             ) : (
               <View style={styles.iconPlaceholder}>
-                <Ionicons name="person-circle" size={95} color="#ccc" />
+                {/* person icon-ta beshi bhalo center hoy person-circle theke */}
+                <Ionicons name="person" size={50} color="#ccc" />
               </View>
             )}
           </View>
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 20,
+    paddingHorizontal: 20,
   },
   header: {
     flexDirection: "row",
@@ -158,10 +160,10 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   imageContainer: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    backgroundColor: "#f9f9f9",
+    width: 100, // Size ektu barano hoyeche centering er jonno
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: "#f2f2f2",
     overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
@@ -173,20 +175,23 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   iconPlaceholder: {
+    width: "100%",
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#f2f2f2",
   },
   editIcon: {
     position: "absolute",
     bottom: 0,
     right: 0,
     backgroundColor: "#f57c00",
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: "#fff",
     elevation: 3,
     shadowColor: "#000",
