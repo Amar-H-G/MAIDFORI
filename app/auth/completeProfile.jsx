@@ -12,7 +12,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { launchImageLibrary } from "react-native-image-picker";
+// Image picker-er jonno expo-image-picker import kora hoyeche
+import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -23,13 +24,27 @@ const CompleteAccount = () => {
   const [service, setService] = useState("Barber");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  /* ---------- Image Picker ---------- */
-  const pickImage = () => {
-    launchImageLibrary({ mediaType: "photo", quality: 0.7 }, (response) => {
-      if (!response.didCancel && response.assets?.length > 0) {
-        setProfileImage(response.assets[0].uri);
-      }
+  /* ---------- Image Picker Logic ---------- */
+  const pickImage = async () => {
+    // Permission check
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (status !== "granted") {
+      alert("Gallery access permission is required to upload a photo.");
+      return;
+    }
+
+    // Gallery open korar logic
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true, // User image crop korte parbe
+      aspect: [1, 1], // Square crop
+      quality: 1,
     });
+
+    if (!result.canceled) {
+      setProfileImage(result.assets[0].uri); // UI-te show korar jonno URI set kora holo
+    }
   };
 
   return (
@@ -43,7 +58,7 @@ const CompleteAccount = () => {
           <Text style={styles.headerText}>Complete your account</Text>
         </View>
 
-        {/* Profile Image / Icon Placeholder */}
+        {/* Profile Image Section */}
         <View style={styles.profileWrapper}>
           <View style={styles.imageContainer}>
             {profileImage ? (
@@ -53,11 +68,12 @@ const CompleteAccount = () => {
               />
             ) : (
               <View style={styles.iconPlaceholder}>
-                {/* person icon-ta beshi bhalo center hoy person-circle theke */}
                 <Ionicons name="person" size={50} color="#ccc" />
               </View>
             )}
           </View>
+
+          {/* Pencil Icon-e click korle pickImage function trigger hobe */}
           <Pressable style={styles.editIcon} onPress={pickImage}>
             <Ionicons name="pencil" size={16} color="#fff" />
           </Pressable>
@@ -160,7 +176,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   imageContainer: {
-    width: 100, // Size ektu barano hoyeche centering er jonno
+    width: 100,
     height: 100,
     borderRadius: 50,
     backgroundColor: "#f2f2f2",

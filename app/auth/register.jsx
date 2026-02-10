@@ -12,7 +12,6 @@ import {
 } from "lucide-react-native";
 import { useState } from "react";
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -20,6 +19,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RegisterScreen() {
   const [gender, setGender] = useState("Female");
@@ -28,103 +28,99 @@ export default function RegisterScreen() {
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar style="dark" />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* ===== Header ===== */}
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()}>
-            <ArrowLeft size={22} color="#0C0C26" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Register Now</Text>
-        </View>
-
-        {/* ===== Full Name ===== */}
-        <Input icon={<User size={18} color="#777" />} placeholder="Full Name" />
-
-        {/* ===== Gender ===== */}
-        <View style={styles.genderRow}>
-          <GenderButton
-            label="Female"
-            selected={gender === "Female"}
-            onPress={() => setGender("Female")}
-          />
-          <GenderButton
-            label="Male"
-            selected={gender === "Male"}
-            onPress={() => setGender("Male")}
-          />
-        </View>
-
-        {/* ===== DOB ===== */}
-        <Input
-          icon={<Calendar size={18} color="#777" />}
-          placeholder="Date of Birth"
-        />
-
-        {/* ===== Religion ===== */}
-        <Input
-          icon={<User size={18} color="#777" />}
-          placeholder="Select Religion"
-          rightIcon={<ChevronDown size={18} color="#777" />}
-        />
-
-        {/* ===== Mobile ===== */}
-        <Input
-          icon={<Phone size={18} color="#777" />}
-          placeholder="Mobile Number"
-          keyboardType="number-pad"
-        />
-
-        {/* ===== Same Whatsapp ===== */}
-        <TouchableOpacity
-          style={styles.checkboxRow}
-          onPress={() => setSameWhatsapp(!sameWhatsapp)}
-          activeOpacity={0.8}
-        >
-          <View
-            style={[styles.checkbox, sameWhatsapp && styles.checkboxActive]}
-          >
-            {sameWhatsapp && <Check size={14} color="#FFF" />}
-          </View>
-          <Text style={styles.checkboxText}>Same for Whatsapp</Text>
+      {/* ===== Header ===== */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()}>
+          <ArrowLeft size={22} color="#0C0C26" />
         </TouchableOpacity>
+        <Text style={styles.headerTitle}>Register Now</Text>
+      </View>
 
-        {/* ===== Whatsapp ===== */}
-        <Input
-          icon={<MessageCircle size={18} color="#777" />}
-          placeholder="Whatsapp Number"
-          keyboardType="number-pad"
+      {/* ===== Full Name ===== */}
+      <Input icon={<User size={18} color="#777" />} placeholder="Full Name" />
+
+      {/* ===== Gender ===== */}
+      <View style={styles.genderRow}>
+        <GenderButton
+          label="Female"
+          selected={gender === "Female"}
+          onPress={() => setGender("Female")}
         />
-
-        {/* ===== Alternate Mobile ===== */}
-        <Input
-          icon={<Phone size={18} color="#777" />}
-          placeholder="Alternate Mobile Number"
-          keyboardType="number-pad"
+        <GenderButton
+          label="Male"
+          selected={gender === "Male"}
+          onPress={() => setGender("Male")}
         />
+      </View>
 
-        {/* ===== Email ===== */}
-        <Input
-          icon={<Mail size={18} color="#777" />}
-          placeholder="Email Address"
-          keyboardType="email-address"
-        />
+      {/* ===== DOB ===== */}
+      <Input
+        icon={<Calendar size={18} color="#777" />}
+        placeholder="Date of Birth"
+      />
 
-        {/* ===== Continue ===== */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => router.push("/auth/completeProfile")}
-        >
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
+      {/* ===== Religion ===== */}
+      <Input
+        icon={<User size={18} color="#777" />}
+        placeholder="Select Religion"
+        rightIcon={<ChevronDown size={18} color="#777" />}
+      />
 
-        {/* ===== Login Now (NEW) ===== */}
-        <View style={styles.loginRow}>
-          <Text style={styles.loginText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => router.push("/auth/login")}>
-            <Text style={styles.loginLink}>Login Now</Text>
-          </TouchableOpacity>
+      {/* ===== Mobile ===== */}
+      <Input
+        icon={<Phone size={18} color="#777" />}
+        placeholder="Mobile Number"
+        keyboardType="number-pad"
+      />
+
+      {/* ===== Same Whatsapp ===== */}
+      <TouchableOpacity
+        style={styles.checkboxRow}
+        onPress={() => setSameWhatsapp(!sameWhatsapp)}
+        activeOpacity={0.8}
+      >
+        <View style={[styles.checkbox, sameWhatsapp && styles.checkboxActive]}>
+          {sameWhatsapp && <Check size={14} color="#FFF" />}
         </View>
-      </ScrollView>
+        <Text style={styles.checkboxText}>Same for Whatsapp</Text>
+      </TouchableOpacity>
+
+      {/* ===== Whatsapp ===== */}
+      <Input
+        icon={<MessageCircle size={18} color="#777" />}
+        placeholder="Whatsapp Number"
+        keyboardType="number-pad"
+      />
+
+      {/* ===== Alternate Mobile ===== */}
+      <Input
+        icon={<Phone size={18} color="#777" />}
+        placeholder="Alternate Mobile Number"
+        keyboardType="number-pad"
+      />
+
+      {/* ===== Email ===== */}
+      <Input
+        icon={<Mail size={18} color="#777" />}
+        placeholder="Email Address"
+        keyboardType="email-address"
+      />
+
+      {/* ===== Continue ===== */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push("/auth/completeProfile")}
+      >
+        <Text style={styles.buttonText}>Continue</Text>
+      </TouchableOpacity>
+
+      {/* ===== Login Now (NEW) ===== */}
+      <View style={styles.loginRow}>
+        <Text style={styles.loginText}>Already have an account? </Text>
+        <TouchableOpacity onPress={() => router.push("/auth/login")}>
+          <Text style={styles.loginLink}>Login Now</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -176,7 +172,8 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
     backgroundColor: "#FFF",
-    paddingTop: 30,
+    // paddingTop: 30,
+    // paddingVertical: 30,
   },
 
   header: {
@@ -184,7 +181,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
     paddingHorizontal: 20,
-    paddingTop: 30,
+    paddingTop: 10,
     marginBottom: 30,
   },
 
@@ -303,7 +300,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ED6E0A",
     borderRadius: 999,
     marginHorizontal: 20,
-    marginTop: 90,
+    marginTop: 40,
     justifyContent: "center",
     alignItems: "center",
   },
