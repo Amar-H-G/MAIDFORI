@@ -9,48 +9,35 @@ import {
   View,
 } from "react-native";
 
-export default function OtpCard() {
+export default function OtpCard({ onBack }) {
+  // 1. onBack prop receive koro
   const router = useRouter();
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [focusedIndex, setFocusedIndex] = useState(null);
   const inputs = useRef([]);
 
-  const handleChange = (text, index) => {
-    const newOtp = [...otp];
-    // Sudhu number accept korbe
-    newOtp[index] = text.replace(/[^0-9]/g, "");
-    setOtp(newOtp);
-
-    // Auto focus to next box
-    if (text && index < 5) {
-      inputs.current[index + 1].focus();
-    }
-  };
-
-  const handleKeyPress = (e, index) => {
-    // Backspace dile ager box-e jabe
-    if (e.nativeEvent.key === "Backspace" && !otp[index] && index > 0) {
-      inputs.current[index - 1].focus();
+  // handleEditMobile function-ti ekhon LoginScreen-er state change korbe
+  const handleEditMobile = () => {
+    if (onBack) {
+      onBack(); // Step ke 'LOGIN' e niye jabe
     }
   };
 
   return (
     <View style={styles.card}>
-      {/* Title */}
       <Text style={styles.title}>OTP Verification</Text>
-
-      {/* Subtitle */}
       <Text style={styles.subtitle}>Enter the 4-digit code sent to</Text>
 
-      {/* Mobile Number + Edit */}
       <View style={styles.mobileRow}>
         <Text style={styles.mobile}>+91 9812345678</Text>
-        <View style={styles.editIcon}>
+
+        {/* Edit Icon click korle handleEditMobile call hobe */}
+        <TouchableOpacity style={styles.editIcon} onPress={handleEditMobile}>
           <Pencil size={12} color="#FFF" />
-        </View>
+        </TouchableOpacity>
       </View>
 
-      {/* OTP Input Fields */}
+      {/* ... baki OTP input fields and buttons same thakbe ... */}
       <View style={styles.otpRow}>
         {otp.map((digit, index) => (
           <TextInput
@@ -58,7 +45,7 @@ export default function OtpCard() {
             ref={(ref) => (inputs.current[index] = ref)}
             style={[
               styles.otpBox,
-              focusedIndex === index && styles.otpBoxFocused, // Click korle red border
+              focusedIndex === index && styles.otpBoxFocused,
             ]}
             value={digit}
             onChangeText={(text) => handleChange(text, index)}
@@ -68,18 +55,16 @@ export default function OtpCard() {
             keyboardType="numeric"
             maxLength={1}
             textAlign="center"
-            selectionColor="#FF0000" // Cursor color red
+            selectionColor="#FF0000"
           />
         ))}
       </View>
 
-      {/* Bottom Row */}
       <View style={styles.bottomRow}>
         <Text style={styles.didntGet}>Didn’t get it?</Text>
         <Text style={styles.timer}>00:12</Text>
       </View>
 
-      {/* Verify Button */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => router.push("/auth/verification")}
@@ -103,7 +88,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "#2E2E74",
     textAlign: "center",
-    lineHeight: 30,
     marginBottom: 6,
   },
   subtitle: {
@@ -127,16 +111,16 @@ const styles = StyleSheet.create({
   editIcon: {
     width: 24,
     height: 24,
-    borderRadius: 999,
+    borderRadius: 12,
     backgroundColor: "#ED6E0A",
     justifyContent: "center",
     alignItems: "center",
   },
   otpRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     marginTop: 24,
-    paddingHorizontal: 50,
+    gap: 15,
   },
   otpBox: {
     width: 48,
@@ -150,7 +134,7 @@ const styles = StyleSheet.create({
     color: "#33266B",
   },
   otpBoxFocused: {
-    borderColor: "#FF0000", // Focused state-e Red border
+    borderColor: "#FF0000",
     borderWidth: 1.5,
     backgroundColor: "#FFF",
   },

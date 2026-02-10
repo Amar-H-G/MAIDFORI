@@ -30,7 +30,9 @@ export default function LoginScreen() {
         <View style={styles.cardWrapper}>
           {step === "LOGIN" && <LoginCard onContinue={() => setStep("OTP")} />}
 
-          {step === "OTP" && <OtpCard />}
+          {step === "OTP" && (
+            <OtpCard onBack={() => setStep("LOGIN")} /> // onBack prop add kora holo
+          )}
         </View>
 
         <Text style={styles.footer}>
