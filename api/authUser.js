@@ -18,7 +18,6 @@ export const AuthUser = () => {
     const defaultHeaders = {};
     let finalData = { ...data };
     let queryParams = {};
-
     if (memberData) {
       const { member_id, member_token } = memberData?.data || {};
       await AsyncStorage.setItem("member_id", member_id);
@@ -34,7 +33,6 @@ export const AuthUser = () => {
 
     try {
       let response;
-
       switch (method) {
         case "GET":
           response = await axios.get(finalURL, {

@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
+import { loginUser, registerUser } from "../api/authUser";
+import Toast from "react-native-toast-message";
 
 const AppContext = createContext();
 
@@ -7,9 +9,19 @@ export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const login = (userData) => {
-    setUser(userData);
-    setIsLoggedIn(true);
+  // Centralized Login Logic
+  const handleLogin = async (mobile) => {
+    setLoading(true);
+    try {
+      const data = await loginUser({ mobile });
+      setUser(data.user);
+      setIsLoggedIn(true);
+      return { success: true, data };
+    } catch (error) {
+      return { success: false, error };
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = () => {
@@ -19,14 +31,7 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{
-        user,
-        isLoggedIn,
-        loading,
-        setLoading,
-        login,
-        logout,
-      }}
+      value={{ user, isLoggedIn, loading, handleLogin, handleRegister, logout }}
     >
       {children}
     </AppContext.Provider>
