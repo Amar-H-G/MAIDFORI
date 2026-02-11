@@ -16,11 +16,13 @@ import * as ImagePicker from "expo-image-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AuthUser } from "../../api/authUser";
+import { useLocalSearchParams } from "expo-router";
 
 /* ===== assume callApi already exists ===== */
 
 const CompleteAccount = () => {
   const { callApi } = AuthUser();
+  const { userData } = useLocalSearchParams();
   const navigation = useNavigation();
   const router = useRouter();
 
@@ -37,6 +39,13 @@ const CompleteAccount = () => {
   const [selectedStateId, setSelectedStateId] = useState(null);
   const [selectedStateName, setSelectedStateName] = useState("");
   const [showStateDropdown, setShowStateDropdown] = useState(false);
+
+  const fetchPayload = () => {
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      console.log("Received Full Payload:", parsedData);
+    }
+  };
 
   /* ===== FETCH API DATA ===== */
   const fetchListData = async () => {
@@ -60,6 +69,7 @@ const CompleteAccount = () => {
 
   useEffect(() => {
     fetchListData();
+    fetchPayload();
   }, []);
 
   /* ===== IMAGE PICKER ===== */

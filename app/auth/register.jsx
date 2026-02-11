@@ -23,6 +23,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthUser } from "../../api/authUser";
+import Toast from "react-native-toast-message";
 
 export default function RegisterScreen() {
   const { callApi } = AuthUser();
@@ -85,11 +86,11 @@ export default function RegisterScreen() {
         step: "1",
         name: fullName,
         gender: gender === "Male" ? "M" : "F",
-        dob: dob, // 05-11-2004
-        religion: selectedReligionId, // ❗ backend key
-        phone: mobile, // ❗ backend key
-        alt_phone: alternateMobile, // ❗ backend key
-        whatsapp: sameWhatsapp ? mobile : whatsapp,
+        dob: dob,
+        religion: selectedReligionId,
+        phone: `${mobile}`,
+        alt_phone: `${alternateMobile}`,
+        whatsapp: sameWhatsapp ? `${mobile}` : `${whatsapp}`,
         email: email,
       };
 
@@ -97,17 +98,53 @@ export default function RegisterScreen() {
 
       const response = await callApi({
         api: "/signupPro",
-        method: "CUSTOM_POST", // 🔥 MUST
+        method: "CUSTOM_POST",
         data: payload,
       });
 
-      console.log("API RESPONSE:", response);
+      const resData = response?.response;
 
-      if (response?.response?.status === "OK") {
-        router.push("/auth/completeProfile");
+      console.log("API RESPONSE:", resData);
+
+      /* ================= SUCCESS CASE ================= */
+      if (resData?.status === "OK" && resData?.calback === "nextstep") {
+        // ✅ Success Toast
+        Toast.show({
+          type: "success",
+          text1: "Registration Successful",
+          props: { code: "200" },
+        });
+
+        const fullData = {
+          ...payload,
+          ...resData?.calbackdata,
+        };
+
+        // ⏳ Delay তারপর Navigate
+        setTimeout(() => {
+          router.push({
+            pathname: "/auth/completeProfile",
+            params: {
+              userData: JSON.stringify(fullData),
+            },
+          });
+        }, 1500);
+      } else {
+        /* ================= ERROR CASE ================= */
+        Toast.show({
+          type: "error",
+          text1: resData?.message || "Registration Failed",
+          props: { code: resData?.status || "400" },
+        });
       }
     } catch (error) {
       console.log("Registration failed:", error);
+
+      Toast.show({
+        type: "error",
+        text1: "Something went wrong",
+        props: { code: "500" },
+      });
     }
   };
 
